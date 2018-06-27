@@ -1,0 +1,143 @@
+<?php include('config/config.php');
+ 
+/**Template Name:feeding
+ * The template for displaying all pages
+ *
+ * This is the template that displays all pages by default.
+ * Please note that this is the WordPress construct of pages and that other
+ * 'pages' on your WordPress site will use a different template.
+ *
+ * @package WordPress
+ * @subpackage Twenty_Thirteen
+ * @since Twenty Thirteen 1.0
+ */
+ 
+
+
+?>
+<div class="container">
+  <div class="blog">
+  <div class="col-sm-8">
+  <?php $items = $this->getNewsItems(); ?>
+<?php foreach ($items as $item): ?>
+         <div class="blog_post">
+             <h2><?php echo $item->getTitle();?></h2>
+                <div class="blog_img-box">
+                <?php if ($item->getImageShortContentShow() && $item->getImageShortContent()){ ?>
+                <?php $imageSize = $this->getShortImageSize($item) ?>
+                
+                 <img src="<?php echo Mage::helper('clnews')->resizeImage(str_replace('clnews/', '', $item->getImageShortContent()), $imageSize['width'], $imageSize['height'], 'clnews'); ?>" />
+                  <?php
+				}
+				  else
+				  { ?>
+					   <img src="<?php echo $this->getSkinUrl('images/big.jpg') ?>" />
+				 <?php  }
+				  
+				  
+				   ?>
+                 
+                </div>
+                <h4><?php echo Mage::helper('clnews')->formatDate($item->getNewsTime()) ?></h4>
+                <p><?php echo Mage::helper('clnews')->contentFilter($item->getShortContent()) ?>
+</p>   
+<a href="<?php echo $item->getUrl($this->getCategory()) ?>">Read more ...</a>
+            </div>
+            
+            <?php endforeach; ?>
+            
+        
+        </div>
+        <div class="col-sm-4">
+        
+        <div class="blog_right">
+         <div class="blog_cat">
+             <h3>Categories</h3>
+                
+                <ul>
+                 <?php
+                			  $categories = Mage::getModel('clnews/category')->getCollection();
+							 
+			   ?>
+<?php if (count($categories)): ?>
+  <?php $count = 0; ?>
+                <?php $level = 0; ?>
+                <?php $children = 0; ?>
+                <?php foreach ($categories as $category): ?>
+                <?php if ($count == 0 && $category->getLevel() == 0): ?>
+                    <?php $level = $category->getLevel(); ?>
+                    <li><a href="<?php echo $category->getUrl() ?>" ><?php echo $category->getTitle();?></a>
+                <?php elseif ($count > 0 && $category->getLevel() == $level): ?>
+                    <?php $level = $category->getLevel(); ?>
+                    </li><li><a href="<?php echo $category->getUrl() ?>" ><?php echo $category->getTitle() ?></a>
+                <?php elseif ($count > 0 && $category->getLevel() != $level && $category->getLevel() > 0): ?>
+                    <?php $children++; ?>
+                    <?php $level = $category->getLevel(); ?>
+                    <ul><li><a href="<?php echo $category->getUrl() ?>" ><?php echo $category->getTitle();?></a>
+                <?php elseif ($count > 0 && $category->getLevel() != $level && $category->getLevel() == 0): ?>
+                    <?php for ($i = 0; $i < $children; $i++): ?>
+                        </ul></li>
+                    <?php endfor; ?>
+                    <?php $children = 0; ?>
+                    <?php $level = $category->getLevel(); ?>
+                        </li><li><a href="<?php echo $category->getUrl() ?>" ><?php echo $category->getTitle();?></a>
+                <?php endif; ?>
+                    <?php $count++; ?>
+                <?php endforeach; ?>
+                    </li>
+                    
+                   
+                    
+<?php endif ?>
+                </ul>
+            </div>
+            
+            <div class="recent_post">
+             <h3>Recent Posts</h3>
+                <?php foreach ($items as $item)
+				{ ?>
+                <div class="recent_img">
+               
+                <?php if ($item->getImageShortContentShow() && $item->getImageShortContent()){ ?>
+                <?php $imageSize = $this->getShortImageSize($item) ?>
+                
+                 <img src="<?php echo Mage::helper('clnews')->resizeImage(str_replace('clnews/', '', $item->getImageShortContent()), $imageSize['width'], $imageSize['height'], 'clnews'); ?>" />
+                  <?php }
+				  else
+				  { ?>
+					  <img src="<?php echo $this->getSkinUrl('images/small.jpg');?>" /> 
+				 <?php }
+				  
+				   ?>
+                </div>
+                <a href="http://petcubes.exxelnet.sg/my-full-blog?id=<?php echo $item->getId(); ?>">
+                <h5 class="blog_title"><?php echo $item->getTitle(); ?></h5>
+                </a>
+<?php } ?>
+        </div>
+        
+        </div>
+        </div>
+        
+</div>
+</div>
+</div>
+<?php if($this->getLastPageNum()>1): ?>
+<div class="pager">
+    <p class="page">
+    <?php if (!$this->isFirstPage()): ?>
+        <a href="<?php echo $this->getPreviousPageUrl() ?>"><?php echo $this->__('Previous') ?></a>
+    <?php endif;?>
+    <?php foreach ($this->getPages() as $_page): ?>
+        <?php if ($this->isPageCurrent($_page)): ?>
+            <span><?php echo $_page ?></span>
+        <?php else: ?>
+            <a href="<?php echo $this->getPageUrl($_page) ?>"><?php echo $_page ?></a>
+        <?php endif ?>
+    <?php endforeach; ?>
+    <?php if (!$this->isLastPage()): ?>
+        <a href="<?php echo $this->getNextPageUrl() ?>"><?php echo $this->__('Next') ?></a>
+    <?php endif ?>
+    </p>
+</div>
+<?php endif;?>

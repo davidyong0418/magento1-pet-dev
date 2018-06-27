@@ -1,0 +1,196 @@
+<?php
+/**
+ * Dropfin
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade 
+ * this extension to newer versions in the future. 
+ *
+ * @category    Dropfin
+ * @package     Previous / Next Product
+ * @copyright   Copyright (c) Dropfin (http://www.dropfin.com)
+ */
+?>
+
+<?php
+    $previousNextHelper = $this->helper('dropfin_previousnext');
+    if($previousNextHelper->getStatus()) {
+
+        $previousProduct = $previousNextHelper->getPreviousProduct();
+        $nextProduct = $previousNextHelper->getNextProduct();
+        if($previousProduct || $nextProduct){
+            ?>
+            <div class="previous-next-top">
+            <?php
+                $buttonType = $previousNextHelper->getButtonType();
+                ?>
+                <div class="previous-product">
+                <?php
+                if($previousProduct){
+                    switch ($buttonType) {
+                        case 1:
+                            $buttonUrl = $previousNextHelper->getPreviousButton();
+                            ?>
+                            <a href="<?php echo $previousProduct->getProductUrl();?>" class="button-only">
+                                <img src="<?php echo $buttonUrl;?>" alt="Previous" title="<?php echo $previousProduct->getName();?>" width="48"/>
+                            </a>
+                            <?php
+                            break;
+                        case 2:
+                            $buttonUrl = $previousNextHelper->getPreviousButton();
+                            ?>
+                            <a href="<?php echo $previousProduct->getProductUrl();?>" class="button-with-name">
+                                <img src="<?php echo $buttonUrl;?>" alt="Previous" title="<?php echo $previousProduct->getName();?>" width="48"/>
+                                <h3><?php echo (strlen($previousProduct->getName())>30) ? substr($previousProduct->getName(), 0, 30).'...': $previousProduct->getName();?></h3>
+                            </a>
+                            <?php
+                            break;
+                        case 3:
+                            $buttonUrl = $previousNextHelper->getPreviousButton();
+                            ?>
+                            <a href="<?php echo $previousProduct->getProductUrl();?>" class="button-with-name" data-placement="right">
+                                <img src="<?php echo $buttonUrl;?>" alt="Previous" width="48"/>
+                                <h3 class="previous_button" title="<?php echo $previousProduct->getName();?>"><?php echo (strlen($previousProduct->getName())>30) ? substr($previousProduct->getName(), 0, 30).'...' : $previousProduct->getName();?></h3>
+                            </a>
+                            <?php $img = $this->helper('catalog/image')->init($previousProduct, 'small_image')->constrainOnly(TRUE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(100);?>
+                            <script type="text/javascript">
+                                jQuery(document).ready(function($){
+                                    $('.previous_button').tooltip({
+                                        track: true,
+                                        position: {
+                                            my: "center bottom-15",
+                                            at: "center top"
+                                        },
+                                        content: '<img src="<?php echo $img; ?>" alt="<?php echo $previousProduct->getName();?>" width="100">'
+                                    });
+                                });
+                            </script>
+                            <?php
+                            break;
+                    }
+                }
+                ?>
+                </div>
+                <div class="back-button">
+                <?php
+                $currentCategory = $previousNextHelper->getCurrentCategory();
+                if($currentCategory) {
+                    $backButtonType = $previousNextHelper->getBackButtonType();
+                    switch ($backButtonType) {
+                        case 1:
+                            $buttonUrl = $previousNextHelper->getBackButton();
+                            ?>
+                            <a href="<?php echo $currentCategory->getUrl();?>" class="button-only">
+                                <img src="<?php echo $buttonUrl;?>" alt="Category" title="<?php echo $currentCategory->getName();?>" width="48"/>
+                            </a>
+                            <?php
+                            break;
+                        case 2:
+                            $buttonUrl = $previousNextHelper->getBackButton();
+                            ?>
+                            <a href="<?php echo $currentCategory->getUrl();?>" class="button-with-name">
+                                <img src="<?php echo $buttonUrl;?>" alt="Category" title="<?php echo $currentCategory->getName();?>" width="48"/>
+                                <h3><?php echo (strlen($currentCategory->getName())>30) ? substr($currentCategory->getName(), 0, 30).'...' : $currentCategory->getName();?></h3>
+                            </a>
+                            <?php
+                            break;
+                        case 3:
+                            $buttonUrl = $previousNextHelper->getBackButton();
+                            ?>
+                            <a href="<?php echo $currentCategory->getUrl();?>" class="button-with-name">
+                                <img src="<?php echo $buttonUrl;?>" alt="Category" title="<?php echo $currentCategory->getName();?>" width="48"/>
+                                <h3 class="back_button" title="<?php echo $currentCategory->getName();?>"><?php echo (strlen($currentCategory->getName())>30) ? substr($currentCategory->getName(), 0, 30).'...' : $currentCategory->getName();?></h3>
+                            </a>
+                            <?php
+                                $_imgHtml   = '';
+                                if ($_imgUrl = $currentCategory->getImageUrl()) {
+                                    $_imgHtml = '<img src="'.$_imgUrl.'" alt="'.$this->escapeHtml($currentCategory->getName()).'" width="200"/>';
+                                    $_imgHtml = $this->helper('catalog/output')->categoryAttribute($_category, $_imgHtml, 'image');
+                                }
+                                if($_imgHtml):
+                                    ?>
+                                    <script type="text/javascript">
+                                        jQuery(document).ready(function($){
+                                            $('.back_button').tooltip({
+                                                track: true,
+                                                position: {
+                                                    my: "center bottom-15",
+                                                    at: "center top"
+                                                },
+                                                content: '<?php echo $_imgHtml;?>'
+                                            });
+                                        });
+                                    </script>
+                                    <?php
+                                endif; 
+                                ?>
+                            <?php
+                            break;
+                    }
+                }
+                ?>
+                </div>
+                <div class="next-product">
+                <?php
+                if($nextProduct) {
+                    switch ($buttonType) {
+                        case 1:
+                            $buttonUrl = $previousNextHelper->getNextButton();
+                            ?>
+                            <a href="<?php echo $nextProduct->getProductUrl();?>" class="button-only">
+                                <img src="<?php echo $buttonUrl;?>" alt="Next" title="<?php echo $nextProduct->getName();?>" width="48"/>
+                            </a>
+                            <?php
+                            break;
+                        case 2:
+                            $buttonUrl = $previousNextHelper->getNextButton();
+                            ?>
+                            <a href="<?php echo $nextProduct->getProductUrl();?>" class="button-with-name">
+                                <img src="<?php echo $buttonUrl;?>" alt="Next" title="<?php echo $nextProduct->getName();?>" width="48"/>
+                                <h3><?php echo (strlen($nextProduct->getName())>30) ? substr($nextProduct->getName(), 0, 30).'...' : $nextProduct->getName();?></h3>
+                            </a>
+                            <?php
+                            break;
+                        case 3:
+                            $buttonUrl = $previousNextHelper->getNextButton();
+                            ?>
+                            <a href="<?php echo $nextProduct->getProductUrl();?>" class="button-with-name">
+                                <img src="<?php echo $buttonUrl;?>" alt="Next" width="48"/>
+                                <h3 class="next_button" title="<?php echo $nextProduct->getName();?>"><?php echo (strlen($nextProduct->getName())>30) ? substr($nextProduct->getName(), 0, 30).'...' : $nextProduct->getName();?></h3>
+                            </a>
+                            <?php $img = $this->helper('catalog/image')->init($nextProduct, 'small_image')->constrainOnly(TRUE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(100);?>
+                            <script type="text/javascript">
+                                jQuery(document).ready(function($){
+                                    $('.next_button').tooltip({
+                                        track: true,
+                                        position: {
+                                            my: "center bottom-15",
+                                            at: "center top"
+                                        },
+                                        content: '<img src="<?php echo $img; ?>" alt="<?php echo $nextProduct->getName();?>" width="100">'
+                                    });
+                                });
+                            </script>
+                            <?php
+                            break;
+                    }
+                }
+                ?>
+                </div>
+            </div>
+            <?php
+        }      
+    }
+
+?>

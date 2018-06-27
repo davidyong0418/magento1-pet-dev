@@ -1,0 +1,54 @@
+<?php include('config/config.php');
+ 
+/**Template Name:feeding
+ * The template for displaying all pages
+ *
+ * This is the template that displays all pages by default.
+ * Please note that this is the WordPress construct of pages and that other
+ * 'pages' on your WordPress site will use a different template.
+ *
+ * @package WordPress
+ * @subpackage Twenty_Thirteen
+ * @since Twenty Thirteen 1.0
+ */
+ 
+
+
+?>
+<?php $home_url = Mage::helper('core/url')->getHomeUrl();?>
+<h1>Know how much to feed</h1>
+<div class="page-subtitle">Wondering how much food your dog needs to eat to be healthy?<br />Use our handy tool to find out!</div>
+<div class="content-container">
+<p>                                   <?php
+
+echo $this->getLayout()->createBlock('cms/block')->setBlockId('hometwoone')->toHtml(); 
+
+?></p>
+<div class="feed_top"><img src="<?php echo $this->getSkinUrl('images/feeding1.png') ?>" alt="" /></div>
+</div>
+<div class="yellow-gradient-bg feed-full">
+<div class="content-container">
+<h1>Transitioning to Pet Cubes</h1>
+<div class="page-subtitle">Now that you&rsquo;ve made the best choice,<br />learn how to get your dog prepared.</div>
+<img src="<?php echo $this->getSkinUrl('images/feeding3.png') ?>" alt="" /></div></div>
+<div class="content-container">
+<div class="feed-thirpart">
+<h1>Preparing Pet Cubes</h1>
+<div class="page-subtitle">Hurry, your pet can't wait!<br />Here's 3 simple ways to prepare Pet Cubes!</div>
+<ul class="nav nav-tabs tabs_feed">
+  <li class="active"><a data-toggle="tab" href="#home">Complete & Premium Cooked series</a></li>
+  <li><a data-toggle="tab" href="#menu1">Raw & Premium Raw series</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="home" class="tab-pane fade in active">
+    <img src="<?php echo $this->getSkinUrl('images/feeding4.png') ?>" alt="" />
+  </div>
+  <div id="menu1" class="tab-pane fade">
+<img src="<?php echo $this->getSkinUrl('images/feedlast2.png') ?>" alt="" />
+  </div>
+  </div>
+</div>
+
+</div>
+<script type='text/javascript' src='<?php echo $this->getSkinUrl('js/jquery-min.js') ?>'></script>

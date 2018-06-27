@@ -1,0 +1,43 @@
+<?php
+/**
+ * Adepta Software Ltd
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ *
+ * @copyright   Copyright (c) 2012 Adepta Software Ltd. (http://adeptasoftware.co.uk)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div id="<?php echo $this->getHtmlId(); ?>">
+    <ul>
+        <li id="delivery-details" class="fields">
+            <div class="field">
+                <label for="s_desired_delivery_date"><?php echo $this->__('Delivery Date') ?></label>
+                <div class="input-box">
+                    <input type="text" title="<?php echo $this->__('Delivery Date') ?>" value="<?php echo $this->htmlEscape($this->getDisplayDate()); ?>" name="order[desired_delivery_date]" id="s_desired_delivery_date" class="input-text validate-date" />
+                </div>
+            </div>
+        </li>
+    </ul>   
+</div>
+<script type="text/javascript">
+// <![CDATA[
+    Calendar.setup({
+        inputField : 's_desired_delivery_date',
+        ifFormat : '<?php echo $this->getDateFormat(); ?>',
+        button : 'cal_date_trig',
+        align : 'Bl',
+        singleClick : true
+    });
+// ]]>
+</script>
+<div style="display:none;" id="shipping-method-deliverydate-overlay" class="overlay"><span><?php echo $this->__('Shipping method selection and delivery date are not applicable') ?></span></div>
+<script type="text/javascript">
+order.overlay('shipping-method-overlay', true);
+order.overlay('shipping-method-deliverydate-overlay', <?php if ($this->getQuote()->isVirtual()): ?>false<?php else: ?>true<?php endif; ?>);
+</script>

@@ -1,0 +1,496 @@
+
+<?php
+
+umask(0);
+Mage::app('default');
+Mage::getModel('core/session', array('name' => 'frontend'));
+
+if(Mage::getModel('customer/session')->isLoggedIn())
+{
+ $customeremail = Mage::getModel('customer/session')->getCustomer()->getEmail();
+ $customerid = Mage::getModel('customer/session')->getCustomer()->getId();
+ $customername = Mage::getModel('customer/session')->getCustomer()->getName();
+?>
+<?php  $home_url = Mage::helper('core/url')->getHomeUrl();?>
+<?php 
+include('config/config.php');
+
+
+
+?>
+<?php //secho $this->getChildHtml('header') ?>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<link href="font.css" rel="stylesheet" type="text/css" />
+<link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+<?php /*?><script type="text/javascript" src="slick.js"></script><?php */?>
+<!--<script type="text/javascript">var siteUrl = "http://localhost/freshpet/game/";</script>-->
+
+
+ <style>
+.title{margin:10px;color:#000;font-family:'MyriadProRegular';font-size: 35px;font-weight:bold;}
+.pts1{background:#ff9f19;overflow: auto;width:100%;margin-top: 20px;}
+.pts2{width:290px;float:left;margin:20px 10px;}
+.pts2 p{color:#fff;font-family:'MyriadProRegular';font-size: 33px;margin:0;line-height: 42px;}
+.pts2 img{width:100%;}
+
+
+.pts3{width:200px;float:left;margin:20px 10px;margin-top: 225px;}
+.pts3 p{color:#000;font-family:'MyriadProRegular';font-size: 18px;}
+
+
+.pts4{width:290px;float:left;margin:20px 10px;background:#fff;overflow:auto;border-radius:10px;}
+.pts4 p.title{color:#000;font-family:'MyriadProRegular';font-size: 60px;padding-bottom:30px;}
+.pts4 .input {color:#000;font-family:'MyriadProRegular';font-size: 18px;padding-left:10px}
+.pts4 .input input[type=text]{border:2px solid #000;border-radius:10px;height:40px;margin:13px;}
+
+.pts4 p {color:#000;font-family:'MyriadProRegular';font-size: 20px;padding-left:20px}
+
+.pts_cols2{width:200px;float:left;margin:5px auto;}
+.pts_cols2 p.title{margin:10px;color:#000;font-family:Myriad Pro;font-size: 35px;font-weight:bold;height: 70px;text-align: center;}
+.pts_cols2 img{width:100%;float:left;margin:5px;}
+
+.pts_cols7{width:450px;float:left;}
+.pts_cols7 p{margin:10px;color:#000;font-family:'MyriadProRegular';font-size: 18px;}
+
+.pts_cols3{width:330px;float:left;}
+.pts_cols3 img{width:100%;}
+.container_left{
+	text-align:center;
+	float:left;
+	width:536px;}
+.container_rght{
+	float:right;
+	text-align:left !important;
+	width:300px;
+	
+	}
+.bingo_cell{
+	text-align:center;
+	border:1px solid #f89a20; 
+	width:71px; 
+	height:71px;
+	margin:auto;
+	font-family: 'PT Sans', sans-serif;
+	color:#000;
+	font-size:13px;}
+	.bingo_cell_active{
+	text-align:center;
+	border:1px solid #f89a20; 
+	width:71px; 
+	height:71px;
+	margin:auto;
+	font-family: 'PT Sans', sans-serif;
+	color:#000;
+	font-size:13px;
+	background:#f89a20}
+.print_icon{
+	clear:both;
+	float:right;
+	/*padding-top:15px;*/margin-right: 20px;
+margin-top: 0px;
+}
+.cnt{
+	clear:both;
+	float:left;
+	width:510px;
+	text-align:left !important;margin-left: 15px;
+margin-top: 10px;
+	}
+.cnt2{
+	clear:both;
+	float:left;
+	width:300px;
+	text-align:left !important;
+	}
+.par1{
+	font-size:13px;
+	/*color:#f89a20;*/
+	color:#000;font-size:16px;
+	}
+h1{
+	font-size:16px;
+	color:#000;
+	text-decoration-color:#dbecb5;
+	text-decoration:underline;
+	padding-top:7px;
+	padding-bottom:0px;
+	}
+.head_bx{
+	width:236px;
+	height:50px;
+	border:#f89a20 2px solid;
+	color:#000;
+	font-size:18px;
+	background-color:#b8d96b;
+	vertical-align:middle;
+	line-height: 45px;
+	padding-left:5px;
+	text-align:center;
+	}
+	
+	.head_bx1 {
+	min-width: 236px;min-height: 52px;border: #f89a20 2px solid;text-align: center;color: #000;font-size: 18px;background-color: #b8d96b;vertical-align: middle;
+	line-height: 52px;border-radius: 0;margin: -2px 0px 0px -7px;padding-top:13px;
+	}
+	
+</style>
+
+<script type="text/javascript">var siteUrl = "<?php echo $home_url?>/game/";</script>
+<script type="text/javascript">
+	
+	function dropdown(userid,gameid,field_id){
+	
+		/*var td = document.getElementById("savedog"+field_id)
+		td.className="bingo_cell_active"*/
+		
+		for(var i =1; i <49 ; i ++){
+			
+		var td = document.getElementById("savedog"+i);
+			//alert(td);
+			//alert(td.getAttribute('class'));
+				if(td.getAttribute('class') == 'bingo_cell_active'){
+				//alert(td.getAttribute('class'));
+				td.className = 'bingo_cell';
+				}
+		}
+		
+		var td = document.getElementById("savedog"+field_id)
+		
+		td.className="bingo_cell_active";
+		
+		strURL=siteUrl;
+		xend=strURL.lastIndexOf("/")+1;
+		var base_url=strURL.substring(0,xend);
+		strURL="dropdown.php?";
+		if(strURL.substring(0,4)!='http'){
+			strURL=base_url+strURL;
+		}
+		var strSubmit="";
+		if(userid!=null){
+			strSubmit="userid="+userid+"&field_id="+field_id+"&game_id="+gameid;
+		}
+		
+		//alert(strURL+strSubmit);
+
+		$.ajax({
+			type: "GET",
+			url: strURL+strSubmit,
+			cache: false,
+			async: false,
+			success: function(responseText) {
+			$("#head_bx").html(responseText);
+			}
+		});
+	}
+</script>
+<script type="text/javascript">
+	
+	function selectspecies(userid,field_id,game_id,species){
+		
+	
+		
+		strURL=siteUrl;
+		xend=strURL.lastIndexOf("/")+1;
+		var base_url=strURL.substring(0,xend);
+		strURL="show.php?";
+		if(strURL.substring(0,4)!='http'){
+			strURL=base_url+strURL;
+		}
+		var strSubmit="";
+		if(userid!=null){
+			strSubmit="userid="+userid+"&field_id="+field_id+"&species="+species+"&game_id="+game_id;
+		}
+	
+		
+		$.ajax({
+			type: "GET",
+			url: strURL+strSubmit,
+			cache: false,
+			async: false,
+			success: function(responseText) {
+			$("#page").html(responseText);
+			//document.getElementById('dropplace').innerHTML='';
+			}
+		});
+	}
+</script>
+
+<script type="text/javascript">
+	
+	function save_game(userid,game_id){
+		
+	    var fname = document.getElementById('fname').value;
+		 var nric = document.getElementById('nric').value;
+		  var cno = document.getElementById('cno').value;
+		   var address = document.getElementById('address').value;
+		   var add = address.replace(/\n/g, ',');
+		   	//alert(add);
+		   if(fname == '' || nric == '' || cno == '' || address == ''){alert('Plz fill above four field before save game'); return false; }
+		   
+		//alert('Are you want to save this game');
+		strURL=siteUrl;
+		xend=strURL.lastIndexOf("/")+1;
+		var base_url=strURL.substring(0,xend);
+		strURL="save_game.php?";
+		if(strURL.substring(0,4)!='http'){
+			strURL=base_url+strURL;
+		}
+		var strSubmit="";
+		if(userid!=null){
+			strSubmit="userid="+userid+"&game_id="+game_id+"&fname="+fname+"&nric="+nric+"&cno="+cno+"&address="+add;
+		}
+	
+		//alert(strURL+strSubmit);
+		$.ajax({
+			type: "GET",
+			url: strURL+strSubmit,
+			cache: false,
+			async: false,
+			success: function(responseText) {
+			$("#page").html(responseText);
+			//document.getElementById('dropplace').innerHTML='';
+			}
+		});
+	}
+</script>
+
+
+
+<script type="text/javascript">
+
+function download(){
+	alert('you want to down load this Game');
+	document.getElementById('dwnld').submit();
+	}
+</script>
+
+
+<div class="container">
+
+
+<div class="sc_header">
+<div class="sc_heading">
+PetCubes® Ultimate Bingo
+</div>
+<div class="sc_content">
+You are now one step closer to winning yourself some amazing prizes. Do remember to print or save your Bingo card after you have populated it.
+Share our website with a friend who has a pet, so he/she can play too.
+We wish one and all good luck!
+</div>
+</div>
+<div class="mdl_container" id="page" style="padding:0">
+<div class="container_left">
+
+<table class = "gamebg" border="1" bordercolor="#f89a20"  cellpadding="0" cellspacing="0" style="border: 1px solid #F89A20;margin: 0px auto; width:499px">
+ <tr> 
+ <?php  
+		
+		$game_sql = "select max(game_id) from game where status = 'active'";
+		$game_result = $mysqli->query($game_sql);
+		$game_row = $game_result->fetch_row();
+		
+		/*echo "user id ". $userid=   $user_info->ID ;
+		echo "  game id ". $gameid= $game_row[0];*/
+		$userid=  $customerid ;
+		$gameid= $game_row[0];
+		
+	   $saved_game = "select * from save_game where user_id=".$userid." AND game_id = ".$gameid." ";
+		$saved_result = $mysqli->query($saved_game);
+		$saved_row = $saved_result->fetch_array();
+		
+		if($saved_row['id'] != '')
+		{
+			
+ $species_sql = " select species.species_name,user_bingo.field_id from user_bingo INNER JOIN species ON species.species_id = user_bingo.species_id  where user_id = ".$userid."  AND game_id = ".$gameid." order by field_id ASC";
+$species_result = $mysqli->query($species_sql);
+$i = 1;
+while($species_row = $species_result->fetch_array()){
+	if($i==25 && $species_row['field_id'] !=25){?>
+	 <td class="bingo_cell" id="savedog<?php echo $i ?>">WILD<br />CARD</td> 
+	<?php $i =$i+1;} ?>
+ <td class="bingo_cell" id="savedog<?php echo $i ?>"><?php echo $species_row['species_name'] ; ?></td>
+<?php 
+	
+if($i%7==0){ 
+?>
+</tr><tr>
+<?php	
+}
+$i =$i+1;
+//echo $compelete."****".$i."*****";
+} ?>
+
+ 
+<?php
+		}
+		else
+		{
+			$save = 1;
+for($i=1;$i<=49;$i++){
+
+$sql="select user_bingo.species_id,species.species_name FROM user_bingo INNER JOIN species on species.species_id=user_bingo.species_id where field_id=".$i." and user_id=".$userid." AND game_id = ".$gameid." ";
+$query=$mysqli->query($sql);
+if($result=$query->fetch_array()){ ?>
+
+ <td class="bingo_cell" onclick="dropdown(<?php echo $userid ?>,<?php echo $gameid ?>,<?php echo $i ?>)" id="savedog<?php echo $i ?>"><?php echo $result['species_name']; ?></td>
+<?php
+	
+}else{
+	$save = 0; 
+	if($i==25){?>
+ <td class="bingo_cell" onclick="dropdown(<?php echo $userid ?>,<?php echo $gameid ?>,<?php echo $i ?>)" id="savedog<?php echo $i ?>">WILD<br />CARD</td> 
+<?php  }else{
+?>	
+	 <td class="bingo_cell" onclick="dropdown(<?php echo $userid ?>,<?php echo $gameid ?>,<?php echo $i ?>)" id="savedog<?php echo $i ?>"><?php echo $i ?></td>
+
+<?php
+
+}
+}
+if($i%7==0){ 
+
+?>
+</tr><tr>
+<?php	
+}
+}
+		}
+?>
+</table>
+
+<?php
+
+
+
+if($saved_row['id'] == '' && $save==1)
+{ 
+?>
+</br>
+<table style="margin-left: 15px;">
+<tr>
+<td><label class="">Full Name*</label></td>
+<td><input type="text" name="fname" id="fname" value=""  /></td>
+</tr>
+<tr>
+<td><label class="">NRIC/FIN*</label></td>
+<td><input type="text" name="nric" id="nric" value=""  /></td>
+</tr>
+<tr>
+<td><label class="">Contact Number*</label></td>
+<td><input type="text" name="cno" id="cno" value=""  /></td>
+</tr>
+<tr>
+<td> <label class="">Address*</label></td>
+<td><textarea rows="3" cols="17" type="text" name="address" id="address" value="" > </textarea> </td>
+</tr>
+</table>
+<div class="print_icon">
+<?php /*?> <button class="head_bx" name="save" id="save" value="save" onclick="save_game(<?php echo $_GET['userid']; ?>,<?php echo $_GET['game_id']; ?>)">Save</button><?php */?>
+ 
+ <button class="head_bx" name="save" id="save" value="save" onclick="if(confirm('No more changes allowed after submission. Proceed?')){save_game(<?php echo $userid; ?>,<?php echo $gameid ?>)}">Submit</button>
+</div>
+<?php } ?>
+
+
+<?php if($saved_row['id'] != '' )
+{   ?>
+</br>
+<table style="margin-left: 15px;">
+<tr>
+<td><label class="">Full Name</label></td>
+<td><input type="text" name="fname" id="fname" value="<?php echo $saved_row['fname']; ?>" disabled="disabled"  /></td>
+</tr>
+<tr>
+<td><label class="">NRIC/FIN</label></td>
+<td><input type="text" name="nric" id="nric" value="<?php echo $saved_row['nric']; ?>" disabled="disabled"  /></td>
+</tr>
+<tr>
+<td><label class="">Contact Number</label></td>
+<td><input type="text" name="cno" id="cno" value="<?php echo $saved_row['cno']; ?>" disabled="disabled" /></td>
+</tr>
+<tr>
+<td> <label class="">Address</label></td>
+<td><textarea rows="3" cols="17" type="text" name="address" id="address" value="" disabled="disabled" > <?php echo $saved_row['address']; ?> </textarea></td>
+</tr>
+</table>
+</br>
+<div class="print_icon">
+<a href="javascript:window.print()">
+  <img src="<?php echo $this->getSkinUrl('images/print_icon.png')?>" width="16" height="16"  />
+  </a>
+</div>
+<?php  }?>
+<!--<div class="print_icon">
+  <img src="images/print_icon.png" width="16" height="16" /></div>-->
+  <div class="cnt">
+<div class="par1">
+<h1>PRE-REGISTRATION</h1>
+Like our page on Facebook to qualify to play.
+</div>
+<div class="par1">
+<h1>REGISTRATION AND SUBMISSION OF ENTRIES (16 April - 30 April 2014)</h1>
+Registration closes when there are 200 participants, or on the 30th of April 2014
+</div>
+<div class="par1">
+<h1>FIRST DRAW DAY</h1>
+1st May  - First Dog Breed will be drawn.<br />
+Subsequently, a differently breed will be drawn daily
+</div>
+<div class="par1">
+<h1>LAST DRAW DAY</h1>
+30 June 2014 or Winner of S$10,000 is drawn.v.<br /><br />
+1st July to 14th July 2014: Notification of winning entries and collection of prizes
+</div>
+</div>
+</div>
+<div class="container_rght">
+<div class="head_bx" id="head_bx">
+Breeds
+</div>
+<div class="cnt2">
+<div class="par1">
+<h1>HOW TO SUBMIT YOUR BINGO CARD</h1>
+<ol class="sbmt_lst">
+<li>Click on any numbered box.</li>
+<li>Select any breed from the list of more than 100 dogs from the drop-down box on the right. As you cannot use the same breed twice, the selected breed will disappear from the list after click.</li>
+<li>Populate all 48 numbered boxes.</li>
+<li>Populate the wild-card box highlighted in green.</li>
+<li>You should now have 49 boxes with breeds. Once you are certain about your selections. Print the card for your personal reference after filling up your personal particulars.
+</li>
+<li>Lastly, proceed to submit it. </li>
+</ol>
+
+</div>
+<div class="par1">
+<h1>GAMEPLAY</h1>
+<ol class="sbmt_lst">
+<li>Every Monday to Friday, a breed will be drawn and 
+announced on our Facebook Page:
+www.facebook.com/petcubes</li>
+<li>Cross out breeds which are drawn by our empire daily.
+(eg. number 30: Jack Russell Terrier)</li>
+<li>Once you have a winning combination
+(refer to 'How to Win'), send an email to 
+fb@freshpets.com.sg with the Subject: PetCubes BINGO!
+Include the following details:
+<ol class="sub_lst">
+<li>Full Name</li>
+<li>NRIC/ FIN</li>
+<li>Contact number</li>
+<li>Address</li>
+</ol></li>
+<li>Our game empire will verify your Bingo Card against
+your online submission and notify you on the collection
+of prizes.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<?php }
+else
+{ 
+	header("location:customer/account/login/");
+}
+?>

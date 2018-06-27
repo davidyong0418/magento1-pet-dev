@@ -1,0 +1,164 @@
+  <script src="<?php echo $this->getSkinUrl('js/readmore.js') ?>"></script>
+<script>
+  
+jQuery(window).on("load", function () {
+        jQuery(".pc-btn-secondary").click(function () {
+           var currentOperation = jQuery(this).text();
+            var val = jQuery(this).attr("data-toggle");
+            if (currentOperation == "Read More") {
+                closeother();
+                jQuery("#" + val).attr("data-readmore", "");
+                jQuery("#" + val).attr("aria-expanded", "true");
+                jQuery("#" + val).addClass("expanded")
+                jQuery("#" + val).css("height", "auto");
+                jQuery(this).text("Close");
+                jQuery(this).addClass("less");
+
+            }
+            else {
+                closeother();
+            }
+            
+        });
+        function closeother() {          
+            jQuery(".expanded").each(function () {
+                var val = jQuery(this).attr("id");              
+                jQuery(this).attr("aria-expanded", "false");
+                jQuery(this).css("height", "65px");
+                jQuery(this).removeClass("expanded");
+            })
+            jQuery(".less").each(function () {
+                jQuery(this).removeClass("less");
+                jQuery(this).text("Read More");
+            });
+        }
+    });
+  </script>
+  
+<?php
+$currentUrl = $this->helper('core/url')->getCurrentUrl();
+
+if($currentUrl ===Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).'news/category/review.html' ) { 
+
+?>
+
+
+  <div class="std">
+
+<h1>Reviews</h1>
+<div class="page-subtitle">Here are some testimonials from pets that have benefited from Pet Cubes<br />We love to hear your stories!</div>
+</div>
+<div class="container">
+<div class="max-width-945 clearfix">
+<div class="pc-review-list clearfix">
+
+<?php $items = $this->getNewsItems();
+
+
+ ?>
+<?php 
+$test=0;
+foreach ($items as $item): 
+$test=$test+1;
+
+?>
+<?php if($test%3==1){ ?>
+<div class="row">
+<?php } ?>
+
+<div class="col-md-4 text-center margin-bottom-50">
+<div class="clearfix pc-review-img margin-bottom-20">
+<?php $imageSize = $this->getFullImageSize($item) ?>
+            <img src="<?php echo Mage::getBaseUrl('media')."/".$item->getImageShortContent(); ?>" /></div>
+<h3 class="clearfix pc-review-title margin-bottom-20"><?php echo $item->getTitle();?></h3>
+<div class="clearfix pc-review-meta margin-bottom-20"><span>My Diet: </span><?php echo $item->getAuthor() ?></div>
+<div class="clearfix pc-review-summary margin-bottom-20 article" style="max-height: none; height: 65px; overflow:hidden;" id="rmjs-<?php echo $test;?>"><?php echo Mage::helper('clnews')->contentFilter($item->getFullContent()) ?></div>
+<div class="clearfix pc-review-more" data-readmore-toggle="rmjs-1" aria-controls="rmjs-1"><a data-toggle="rmjs-<?php echo $test;?>" class="pc-btn-secondary">Read More</a></div>
+
+</div>
+<?php if($test%3==0){ ?>
+</div>
+
+<?php } ?>
+<?php endforeach; ?>
+
+
+</div>
+</div>
+</div>
+
+
+
+<?php
+}
+else
+{
+	
+?>
+
+<?php $items = $this->getNewsItems();
+
+
+ ?>
+<?php foreach ($items as $item): ?>
+<?php
+if($this->getCategoryByNews($item->getID())->getData('title')=='review')
+{
+}
+else
+{
+?>
+<div class="news-item">
+    <h5><a href="<?php echo $item->getUrl($this->getCategory()) ?>" ><?php echo $item->getTitle();?></a></h5>
+    <?php if ($item->getImageFullContentShow() && $item->getImageFullContent()): ?>
+    <div class="blog_img-box">
+     <img src="<?php echo Mage::getBaseUrl('media')."/".$item->getImageShortContent(); ?>" />
+    </div>
+    <?php endif ?>
+    <?php if (Mage::helper('clnews')->showDate()): ?>
+        <span class="date"><?php echo Mage::helper('clnews')->formatDate($item->getNewsTime()) ?></span>
+    <?php endif ?>
+   
+    
+    <div class="description ">
+    <p>
+        <?php echo Mage::helper('clnews')->contentFilter($item->getShortContent()) ?>
+        </p>
+
+        <?php if(Mage::helper('clnews')->enableLinkRoute()): ?>
+        <?php if($link = Mage::helper('clnews')->getLinkRoute()): ?>
+            <a href="<?php echo $item->getUrl($this->getCategory()) ?>" class="more"><?php echo $link . '&raquo;';?></a>
+        <?php else: ?>
+            <a href="<?php echo $item->getUrl($this->getCategory()) ?>" class="more"><?php echo $this->__('Read more....');?></a>
+        <?php endif; ?>
+    <?php endif; ?>
+    </div>
+
+    <div>
+        
+    </div>
+</div>
+<div class="clearing"></div>
+<?php } ?>
+<?php endforeach; ?>
+
+<?php if($this->getLastPageNum()>1): ?>
+<div class="pager">
+    <p class="page">
+    <?php if (!$this->isFirstPage()): ?>
+        <a href="<?php echo $this->getPreviousPageUrl() ?>"><?php echo $this->__('Previous') ?></a>
+    <?php endif;?>
+    <?php foreach ($this->getPages() as $_page): ?>
+        <?php if ($this->isPageCurrent($_page)): ?>
+            <span><?php echo $_page ?></span>
+        <?php else: ?>
+            <a href="<?php echo $this->getPageUrl($_page) ?>"><?php echo $_page ?></a>
+        <?php endif ?>
+    <?php endforeach; ?>
+    <?php if (!$this->isLastPage()): ?>
+        <a href="<?php echo $this->getNextPageUrl() ?>"><?php echo $this->__('Next') ?></a>
+    <?php endif ?>
+    </p>
+</div>
+<?php endif;?>
+<?php } ?>

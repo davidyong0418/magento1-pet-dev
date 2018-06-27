@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Dropfin
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade 
+ * this extension to newer versions in the future. 
+ *
+ * @category    Dropfin
+ * @package     Previous / Next Product
+ * @copyright   Copyright (c) Dropfin (http://www.dropfin.com)
+ */
+-->
+<config>
+    <modules>
+        <Dropfin_Previousnext>
+            <version>1.0.0</version>
+        </Dropfin_Previousnext>
+    </modules>
+
+    <default>
+        <dropfin_previousnext>
+            <configurations module="previousnext">
+                <enabled>1</enabled>
+                <button_location>top</button_location>
+            </configurations>
+            <button_setting module="previousnext">
+                <show_button_as>1</show_button_as>
+                <pre_button_image>dropfin/previousnext/previous.png</pre_button_image>
+                <next_button_image>dropfin/previousnext/next.png</next_button_image>
+            </button_setting>
+            <back_button_setting module="previousnext">
+                <show_button_as>1</show_button_as>
+                <pre_button_image>dropfin/previousnext/back.png</pre_button_image>
+            </back_button_setting>            
+        </dropfin_previousnext>
+    </default>
+
+    <frontend>
+        <routers>
+            <dropfin_previousnext>
+                <use>standard</use>
+                <args>
+                    <module>Dropfin_Previousnext</module>
+                    <frontName>previousnext</frontName>
+                </args>
+            </dropfin_previousnext>
+        </routers>      
+        <layout>
+            <updates>
+                <dropfin_previousnext>
+                    <file>dropfin/previousnext.xml</file>
+                </dropfin_previousnext>
+            </updates>
+        </layout>
+    </frontend>
+
+    <global>
+        <helpers>
+            <dropfin_previousnext>
+                <class>Dropfin_Previousnext_Helper</class>
+            </dropfin_previousnext>
+        </helpers>
+
+        <models>
+            <previousnext>
+                <class>Dropfin_Previousnext_Model</class>
+            </previousnext>
+        </models>
+    </global> 
+</config>

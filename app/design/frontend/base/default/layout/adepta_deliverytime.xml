@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Adepta Software Ltd
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ *
+ * @copyright   Copyright (c) 2012 Adepta Software Ltd. (http://adeptasoftware.co.uk)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+-->
+<layout version="0.1.0">   
+    <checkout_onepage_index>
+        <reference name="checkout.onepage.shipping_method.available">
+            <action method="setTemplate">
+                <template>adepta_deliverytime/checkout/onepage/shipping_method/available.phtml</template>
+            </action>
+            <block type="checkout/onepage_shipping_method_available" template="checkout/onepage/shipping_method/available.phtml" name="adepta.checkout.onepage.shipping_method.available"></block>
+            <block type="adepta_deliverytime/onepage_deliverydate" name="adepta.deliverydate">
+                <block type="adepta_deliverytime/onepage_deliverydate_dropdown" name="adepta.deliverydate.dropdown"></block>
+            </block>
+        </reference>    
+        <reference name="checkout.progress">
+            <action method="setTemplate">
+                <template>adepta_deliverytime/checkout/onepage/progress.phtml</template>
+            </action>
+        </reference>
+    </checkout_onepage_index>
+    <checkout_onepage_shippingmethod>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>adepta_deliverytime/checkout/onepage/shipping_method/available.phtml</template>
+            </action>
+            <block type="checkout/onepage_shipping_method_available" template="checkout/onepage/shipping_method/available.phtml" name="adepta.checkout.onepage.shipping_method.available"></block>
+            <block type="adepta_deliverytime/onepage_deliverydate" name="adepta.deliverydate">
+                <block type="adepta_deliverytime/onepage_deliverydate_dropdown" name="adepta.deliverydate.dropdown"></block>
+            </block>
+        </reference>
+    </checkout_onepage_shippingmethod>
+    <checkout_onepage_progress>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>adepta_deliverytime/checkout/onepage/progress.phtml</template>
+            </action>
+        </reference>    
+    </checkout_onepage_progress>
+    <sales_order_view>
+        <reference name="my.account.wrapper">
+            <block type="adepta_deliverytime/display_deliverydate" after='sales.order.info'></block>
+        </reference>
+    </sales_order_view>
+    <sales_order_invoice>
+        <reference name="my.account.wrapper">
+            <block type="adepta_deliverytime/display_deliverydate" after='sales.order.info'></block>
+        </reference>    
+    </sales_order_invoice>
+    <sales_order_shipment>
+        <reference name="my.account.wrapper">
+            <block type="adepta_deliverytime/display_deliverydate" after='sales.order.info'></block>
+        </reference>    
+    </sales_order_shipment>
+    <sales_order_creditmemo>
+        <reference name="my.account.wrapper">
+            <block type="adepta_deliverytime/display_deliverydate" after='sales.order.info'></block>
+        </reference>    
+    </sales_order_creditmemo>
+</layout>

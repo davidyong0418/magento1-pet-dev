@@ -1,0 +1,1029 @@
+<?php
+
+
+
+/**
+
+
+
+ * Banner slider template
+
+
+
+ *
+
+
+
+ * @see Olegnax_Athlete_Block_Bannerslider
+
+
+
+ *
+
+
+
+ */
+
+
+
+$athleteHelper = $this->helper('athlete');
+
+
+
+$athleteImgHelper = $this->helper('athlete/image');
+
+
+
+$slideGroup = $this->getGroup($this->getSlideGroup());
+
+
+
+
+
+
+
+$slides = $this->getSlides();
+
+
+
+
+
+
+
+//$slides = $this->getSlides();
+
+
+
+?>
+
+
+
+ 
+
+
+
+<section id="feature-boxes" class="clearfix margin-bottom-20">
+
+
+
+  <div class="container">
+
+
+
+    <div class=" clearfix">
+
+
+
+      <div class="row">
+
+
+
+               <?php
+
+
+
+echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-one')->toHtml(); 
+
+
+
+?>
+
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+</section>
+
+
+
+<section class="clearfix margin-bottom-30">
+
+
+
+  <div class="products-tab-wrap">
+
+
+
+    <div class="container">
+
+
+
+      <div class="max-width-945 clearfix" id="tabs">
+
+
+
+        <ul role="tablist" class="row nav nav-tabs">
+
+
+
+          <!--<li role="presentation" class="active"> <a href="#essentials" role="tab" data-toggle="tab" aria-controls="essentials">Essentials<span>Staple Diet</span></a> </li>-->
+
+
+
+          <li role="presentation" class="cat-slide active"> <a href="#complete" role="tab" data-toggle="tab" aria-controls="complete">Gently Cooked <span>Immune and Digestive Boost</span></a> </li>
+
+
+
+          <li role="presentation" class="cat-slide"> <a href="#raw" role="tab" data-toggle="tab" aria-controls="raw">Raw<span>Best of Nature</span></a> </li>
+
+
+
+          <li role="presentation" class="cat-slide"> <a href="#premium" role="tab" data-toggle="tab" aria-controls="premium">Toppers<span>MEAL ADD-ONS </span></a> </li>
+
+
+
+        </ul>
+
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+  <div class="products-tab-content-wrap yellow-gradient-bg">
+
+
+
+    <div class="container">
+
+
+
+      <div class="clearfix">
+
+
+
+        <div class="tab-content text-center">
+
+<div role="tabpanel" class="row tab-pane fade active in " id="complete">
+
+             <?php 
+
+         $products = Mage::getModel('catalog/category')->load(241); //put your category id here
+
+       $productslist = $products->getProductCollection()->addAttributeToSelect('*');
+
+	
+
+	  // print_r($productslist);
+
+	   //die();
+
+       foreach($productslist as $product)
+
+       {
+
+		      $productMediaConfig = Mage::getModel('catalog/product_media_config');
+
+	   $baseImageUrl  = $productMediaConfig->getMediaUrl($product->getImage());
+
+$smallImageUrl = $productMediaConfig->getMediaUrl($product->getSmallImage());
+
+$thumbnailUrl  = $productMediaConfig->getMediaUrl($product->getThumbnail());
+
+        //echo 'price: ' . $product->getPrice() . '<br/>';
+
+		$str = $product->getName();
+
+		//print_r (explode(" ",$str));
+
+		
+
+		$name=explode("-",$str,2);
+
+		?>
+
+
+
+          
+
+
+
+            <div class="column-5 margin-bottom-30 gentlycooked">
+
+              <div class="item-wrapper">
+
+                <p class="item-thumb"><a href="<?php echo $product->getProductUrl() ;?>"><img src="<?php echo $smallImageUrl; ?>" /></a></p>
+
+                <p class="cat-title item-part">Gently Cooked</p>
+
+                <p class="item-title item-part"><?php echo $name[1] ;?></p>
+
+                <p class="item-link item-part"><a href="<?php echo $product->getProductUrl() ;?>">Learn More</a></p>
+
+                 <p class="cat-title item-partpriz">Price starts from <?php
+
+				 
+
+				  $number=$product->getSpecialPrice(); 
+
+				  $english_format_number = number_format($number, 2, '.', '');
+
+				  echo $english_format_number;
+
+				  ?></p>
+
+              </div>
+
+            </div>
+
+
+
+         
+
+          <?php } ?>
+
+          <div class="container box_a">
+
+
+
+  	
+
+
+
+   
+
+
+
+
+    <div class="col-md-2 text-center margin-bottom-10">
+
+
+
+   		<div class="a_img">
+
+
+
+   		<img src="<?php echo $this->getSkinUrl('images/a3.png') ?>"/>
+
+
+
+        </div>
+
+
+
+        <h3>cooked at 80 degrees to eliminate bacteria and parasites while retaining minerals and vitamins</h3>
+
+
+
+   </div>
+   
+   <div class="col-md-2 text-center margin-bottom-10 complete">
+
+
+
+   		<div class="a_img">
+
+
+
+   		<img src="<?php echo $this->getSkinUrl('images/icon1.png') ?>"/>
+
+
+
+        </div>
+
+
+
+        <h3>formulated as whole meals with added nutrition</h3>
+
+
+
+   </div>
+
+
+
+   
+
+
+
+    <div class="col-md-2 text-center margin-bottom-10">
+
+
+
+   		<div class="a_img">
+
+
+
+   		<img src="<?php echo $this->getSkinUrl('images/a4.png') ?>"/>
+
+
+
+        </div>
+
+
+
+        <h3>immediately packed & blast frozen to lock in freshness</h3>
+
+
+
+   </div>
+
+
+
+   
+
+
+
+    <div class="col-md-2 text-center margin-bottom-10">
+
+
+
+   		<div class="a_img">
+
+
+
+   		<img src="<?php echo $this->getSkinUrl('images/a5.png') ?>"/>
+
+
+
+        </div>
+
+
+
+        <h3>wholesome & nutritious</h3>
+
+
+
+   </div>
+
+
+
+   
+
+
+
+    <div class="col-md-2 text-center margin-bottom-10">
+
+
+
+   		<div class="a_img">
+
+
+
+   		<img src="<?php echo $this->getSkinUrl('images/a6.png') ?>"/>
+
+
+
+        </div>
+
+
+
+        <h3>ideal for dogs of all ages</h3>
+
+
+
+   </div>
+   <div class="col-md-2 text-center margin-bottom-10">
+
+
+
+   		<div class="a_img">
+
+
+
+   		<img src="<?php echo $this->getSkinUrl('images/icon4.png') ?>"/>
+
+
+
+        </div>
+
+
+
+        <h3>helps to create a robust immune & digestive system</h3>
+
+
+
+   </div>
+
+
+
+  </div>
+
+           </div> 
+
+
+
+          <div role="tabpanel" class="row tab-pane fade " id="raw">
+
+           <?php 
+
+         $products = Mage::getModel('catalog/category')->load(242); //put your category id here
+
+       $productslist = $products->getProductCollection()->addAttributeToSelect('*');
+
+	  // print_r($productslist);
+
+	 
+
+       foreach($productslist as $product)
+
+       {
+
+		   $productMediaConfig = Mage::getModel('catalog/product_media_config');
+
+	   $baseImageUrl  = $productMediaConfig->getMediaUrl($product->getImage());
+
+$smallImageUrl = $productMediaConfig->getMediaUrl($product->getSmallImage());
+
+$thumbnailUrl  = $productMediaConfig->getMediaUrl($product->getThumbnail());
+
+        //echo 'price: ' . $product->getPrice() . '<br/>';
+
+		$str = $product->getName();
+
+		//print_r (explode(" ",$str));
+
+		
+
+		$name=explode("-",$str,2);
+
+		//echo Nikhil;
+
+	
+
+		?>
+
+
+
+            <div class="column-5 margin-bottom-30">
+
+              <div class="item-wrapper">
+
+                <p class="item-thumb"><a href="<?php echo $product->getProductUrl() ;?>"><img src="<?php echo $smallImageUrl; ?>" /></a></p>
+
+                <p class="cat-title item-part">Raw</p>
+
+                <p class="item-title item-part"><?php echo $name[1] ;?></p>
+
+                <p class="item-link item-part"><a href="<?php echo $product->getProductUrl() ;?>">Learn More</a></p>
+
+                <p class="cat-title item-partpriz">Price starts from <?php
+
+				 
+
+				  $number=$product->getSpecialPrice(); 
+
+				  $english_format_number = number_format($number, 2, '.', '');
+
+				  echo $english_format_number;
+
+				  ?></p>
+
+              </div>
+
+            </div>
+
+            
+
+            
+
+            <?php } ?>
+
+            <div class="container box_a">
+
+
+
+  	
+
+
+
+   <div class="col-md-2 text-center margin-bottom-10 raw">
+
+
+
+   		<div class="a_img">
+
+
+
+   		<img src="<?php echo $this->getSkinUrl('images/a1.png') ?>"/>
+
+
+
+        </div>
+
+
+
+        <h3>wholesome, nutritious meal in raw form</h3>
+
+
+
+   </div>
+
+
+
+   
+
+
+
+    <div class="col-md-2 text-center margin-bottom-10">
+
+
+
+   		<div class="a_img">
+
+
+
+   		<img src="<?php echo $this->getSkinUrl('images/icon4.png') ?>"/>
+
+
+
+        </div>
+
+
+
+        <h3>fortified with super antioxidants</h3>
+
+
+
+   </div>
+
+
+
+   
+
+
+
+    <div class="col-md-2 text-center margin-bottom-10">
+
+
+
+   		<div class="a_img">
+
+
+
+   		<img src="<?php echo $this->getSkinUrl('images/a5.png') ?>"/>
+
+
+
+        </div>
+
+
+
+        <h3>protein & nutients in a form that dogs consume in their natural environment</h3>
+
+
+
+   </div>
+
+
+
+   
+
+
+
+    <div class="col-md-2 text-center margin-bottom-10">
+
+
+
+   		<div class="a_img">
+
+
+
+   		<img src="<?php echo $this->getSkinUrl('images/a4.png') ?>"/>
+
+
+
+        </div>
+
+
+
+        <h3>immediately packed & blast frozen to lock in freshness</h3>
+
+
+
+   </div>
+
+
+
+   
+
+
+
+    <div class="col-md-2 text-center margin-bottom-10">
+
+
+
+   		<div class="a_img">
+
+
+
+   		<img src="<?php echo $this->getSkinUrl('images/a3.png') ?>"/>
+
+
+
+        </div>
+
+
+
+        <h3>stored at -25 degree celsius to kill parasites</h3>
+
+
+
+
+
+   </div>
+
+
+
+   
+
+
+
+    <div class="col-md-2 text-center margin-bottom-10">
+
+
+
+   		<div class="a_img">
+
+
+
+   		<img src="<?php echo $this->getSkinUrl('images/a6.png') ?>"/>
+
+
+
+        </div>
+
+
+
+        <h3>ideal for dogs of all ages</h3>
+
+
+
+   </div>
+
+
+
+  </div>
+
+
+
+          </div>
+
+
+
+          <div role="tabpanel" class="row tab-pane fade " id="premium">
+
+ <?php
+
+		   $products = Mage::getModel('catalog/category')->load(259); //put your category id here
+
+       $productslist = $products->getProductCollection()->addAttributeToSelect('*');
+
+	  // print_r($productslist);
+
+	   //die();
+
+       foreach($productslist as $product)
+
+       {
+
+		   $productMediaConfig = Mage::getModel('catalog/product_media_config');
+
+	   $baseImageUrl  = $productMediaConfig->getMediaUrl($product->getImage());
+
+$smallImageUrl = $productMediaConfig->getMediaUrl($product->getSmallImage());
+
+$thumbnailUrl  = $productMediaConfig->getMediaUrl($product->getThumbnail()); 
+
+        //echo 'price: ' . $product->getPrice() . '<br/>';
+
+		$str = $product->getName();
+
+		//print_r (explode(" ",$str));
+
+		
+
+		$name=explode("-",$str,2);
+
+		?>
+
+            <div class="column-5 margin-bottom-30">
+
+              <div class="item-wrapper">
+
+                <p class="item-thumb"><a href="<?php echo $product->getProductUrl() ;?>"><img src="<?php echo $smallImageUrl; ?>" /></a></p>
+
+                <p class="cat-title item-part">Toppers</p>
+
+                <p class="item-title item-part"><?php echo $name[1] ;?></p>
+
+                <p class="item-link item-part"><a href="<?php echo $product->getProductUrl() ;?>">Learn More</a></p>
+
+                <p class="cat-title item-partpriz">Price starts from <?php
+
+				 
+
+				  $number=$product->getSpecialPrice(); 
+
+				  $english_format_number = number_format($number, 2, '.', '');
+
+				  echo $english_format_number;
+
+				  ?></p>
+
+              </div>
+
+            </div>
+
+            <?php } ?>
+
+            <div class="container box_a">
+
+
+
+  	
+
+
+
+   <div class="col-md-12 text-center margin-bottom-10 premium">
+
+
+
+   		<div class="a_img">
+
+
+
+   		<img src="<?php echo $this->getSkinUrl('images/a1.png') ?>"/>
+
+
+
+        </div>
+
+
+
+        <h3>great nutritious addition to regular meals</h3>
+
+
+
+   </div>
+
+
+
+   
+
+
+
+    
+
+
+   
+
+
+
+   
+
+
+   
+
+
+
+    
+
+
+
+   
+
+
+
+
+
+
+   
+
+
+
+    
+
+
+
+  </div>
+
+
+
+          </div>
+
+
+
+        </div>
+
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+    
+
+
+
+  </div>
+
+
+
+  
+
+
+
+  
+
+
+
+</section>
+
+
+
+
+
+
+
+<!--<section class="clearfix margin-bottom-50 padding-bottom-30">
+
+
+
+  <div class="container">
+
+
+
+    <div class=" clearfix">
+
+
+
+      <div class="row">
+
+
+
+        <div class="col-md-12">
+
+
+
+          <div class="clearfix">
+
+
+
+            <div class="cs-form-wrap text-center">
+
+
+
+              <div class="cs-form-header">
+
+
+
+                              <?php
+
+
+
+echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-three')->toHtml(); 
+
+
+
+?>
+
+
+
+            </div>
+
+
+
+          </div>
+
+
+
+        </div>
+
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+</section>-->
+
+
+
+<section class="clearfix no-margin-bottom padding-bottom-30">
+
+
+
+  <div class="container">
+
+
+
+    <div class=" clearfix">
+
+
+
+      <div class="row">
+
+
+
+        <div class="col-md-12">
+
+
+
+          <div class="clearfix">
+
+
+
+            <div class="cs-form-wrap text-center">
+
+
+
+              <div class="cs-form-header">
+
+
+
+                <div class="cs-form-title txt-big margin-bottom-20">Having problems deciding?</div>
+
+
+
+                <div class="cs-form-sub-title margin-bottom-20">Let our customer service representative help you.<br/>
+
+
+
+                  Leave your contact details and we will get back to you shortly.</div>
+
+
+
+              </div>
+
+
+
+              <div class="cs-form-body text-left">
+
+
+
+                <div class="cs-form-loader"></div>
+
+
+
+                                              <?php
+
+
+
+echo $this->getLayout()->createBlock('cms/block')->setBlockId('hometwo')->toHtml(); 
+
+
+
+?>
+
+
+
+              </div>
+
+
+
+            </div>
+
+
+
+          </div>
+
+
+
+        </div>
+
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+</section>
+

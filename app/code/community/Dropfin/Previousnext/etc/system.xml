@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Dropfin
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade 
+ * this extension to newer versions in the future. 
+ *
+ * @category    Dropfin
+ * @package     Previous / Next Product
+ * @copyright   Copyright (c) Dropfin (http://www.dropfin.com)
+ */
+-->
+<config>
+    <tabs>
+        <dropfin translate="label">
+            <label>Dropfin</label>
+            <sort_order>150</sort_order>
+        </dropfin>
+    </tabs>
+    <sections>
+        <dropfin_previousnext translate="label">
+            <label>Product Previous / Next Button</label>
+            <tab>dropfin</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>60</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+
+                <configurations translate="label">
+                    <label>Extension's Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+
+                        <enabled translate="label">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+
+                        <button_location translate="label">
+                            <label>Position</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>previousnext/position</source_model>
+                            <sort_order>2</sort_order>
+                            <comment>Position that where the button need to be display</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <enabled>1</enabled>
+                            </depends>
+                            <validate>required-entry</validate>
+                        </button_location>
+
+                    </fields>
+                </configurations>
+
+                <button_setting translate="label">
+                    <label>Previous / Next Button Setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <show_button_as translate="label">
+                            <label>Show Button As</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>previousnext/showas</source_model>
+                            <sort_order>1</sort_order>
+                            <comment></comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                        </show_button_as>
+
+                        <pre_button_image translate="label">
+                            <label>Previous Button Image</label>
+                            <frontend_type>image</frontend_type>
+                            <sort_order>2</sort_order>
+                            <comment></comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                        </pre_button_image>
+
+                        <next_button_image translate="label">
+                            <label>Next Button Image</label>
+                            <frontend_type>image</frontend_type>
+                            <sort_order>3</sort_order>
+                            <comment></comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                        </next_button_image>
+                    </fields>
+                </button_setting>
+
+                <back_button_setting translate="label">
+                    <label>Back Button Setting</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>3</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <show_button_as translate="label">
+                            <label>Show Button As</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>previousnext/showbackbuttonas</source_model>
+                            <sort_order>1</sort_order>
+                            <comment></comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                        </show_button_as>
+
+                        <pre_button_image translate="label">
+                            <label>Button Image</label>
+                            <frontend_type>image</frontend_type>
+                            <sort_order>2</sort_order>
+                            <comment></comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry</validate>
+                        </pre_button_image>
+                    </fields>
+                </back_button_setting>
+
+            </groups>
+        </dropfin_previousnext>
+    </sections>
+</config>

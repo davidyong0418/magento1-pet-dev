@@ -1,0 +1,153 @@
+<?php include('config/config.php');
+ 
+/**Template Name:Calculator
+ * The template for displaying all pages
+ *
+ * This is the template that displays all pages by default.
+ * Please note that this is the WordPress construct of pages and that other
+ * 'pages' on your WordPress site will use a different template.
+ *
+ * @package WordPress
+ * @subpackage Twenty_Thirteen
+ * @since Twenty Thirteen 1.0
+ */
+ 
+
+
+?>
+<?php $home_url = Mage::helper('core/url')->getHomeUrl();?>
+<style>
+.pts_cols10{width:100%;}
+.title{margin:10px;color:#000;font-family:'Arial';font-size: 35px;font-weight:bold;}
+.pts1{/*background:#ff9f19;*/overflow: auto;width:100%;margin-top: 20px; background:#fff;}
+.pts2{width:500px;float:left;margin:20px 10px;}
+.pts2 p{color:#494847;font-family:'Arial';font-size: 33px;margin:0;line-height: 42px;}
+.pts2 img{width:100%; margin-top:20px;}
+
+
+.pts3{width:170px;float:left;margin:20px 10px;margin-top: 225px;}
+.pts3 p{color:#000;font-family:'Arial';font-size: 18px;}
+.paets3{width:170px;float:right;margin:20px 10px;}
+.paets3 p{color:#000;font-family:'Arial';font-size: 18px;}
+.pts2-img { float: left;  width: 300px;}
+
+
+.pts4{ background: none repeat scroll 0 0 #FFFFFF;border: 13px solid #FF9F19; border-radius: 0; float: left; margin:35px 10px 20px; overflow: auto;  width: 290px;}
+.pts4 p.title{color:#000;font-family:'Arial';font-size: 60px;padding-bottom:20px;}
+.pts4 .input {color:#000;font-family:'Arial';font-size: 18px;padding-left:10px;  padding-bottom:20px;}
+.pts4 .input input[type=text]{border:2px solid #000;border-radius:10px;height:40px;margin:13px 0; }
+
+.pts4 p {color:#000;font-family:'Arial';font-size: 20px;padding-left:10px}
+
+.pts_cols2{width:200px;float:left;margin:5px auto;}
+.pts_cols2 p.title{  color: #000000;  font-family: Myriad Pro;  font-size: 35px;  font-weight: bold;   height: 86px;  margin: 10px;   padding: 0 35px;  text-align: left;    width: 245px;}
+.pts_cols2 img{width:100%;float:left;margin:5px;}
+
+.pts_cols7{width:450px;float:left;}
+.pts_cols7 p{margin:10px;color:#000;font-family:'Arial';font-size: 18px;  padding-bottom: 15px;}
+
+.pts_cols3{width:330px;float:left;}
+.pts_cols3 img{width:100%; margin-top:-23px;}
+
+
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+
+<script type="text/javascript">var siteUrl ='<?php echo $home_url ?>';</script>
+<script type="text/javascript">
+	function shoe_detail(value){
+		
+		//alert(value);
+		//alert(siteUrl);
+		strURL=siteUrl;
+		
+		xend=strURL.lastIndexOf("/")+1;
+		var base_url=strURL.substring(0,xend);
+		strURL="detail.php?";
+		if(strURL.substring(0,4)!='http'){
+			strURL=base_url+strURL;
+		}
+		var strSubmit="";
+		if(value!=null){
+			strSubmit="value="+value;
+		}
+		//alert(""+strURL+strSubmit);
+		$.ajax({
+			type: "GET",
+			url: strURL+strSubmit,
+			cache: false,
+			async: false,
+			success: function(responseText) {
+			$("#dog_detail").html(responseText);
+			}
+		});
+	}
+</script>
+
+
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
+
+	
+    <!--<div style="clear:both;"></div>-->
+    
+    <div class="pts1">
+    
+    <span id="dog_detail">
+    	<div class="pts2">
+        <?php ?>
+   			<p>Do you know that your pet can live up to 15% longer if it is fed the right amount of fresh diet?</p>
+            <div class="pts2-img">
+            <img src="<?php echo $home_url ?>/game/img/species/b469419d59508ee28f2e8682fac8ad4dc668b32d.jpg" height=""  />
+            </div>
+            <div class="paets3">
+        
+<p style="font-family:Arial, Helvetica, sans-serif"><strong>Healthy Weight Range:</strong>&nbsp;34kg - 52kg</p><br>
+
+<p style="font-family:Arial, Helvetica, sans-serif"><strong>Recommended Diet Size:</strong>&nbsp;X-Large</p><br>
+
+<!--<p>To consume 400gm - 600gm of PetCubes per day.</p>-->
+    	</div>
+            
+    	</div>
+    	<!--<div class="pts3">
+        
+<p><strong>Healthy Weight Range:</strong>&nbsp;34kg - 52kg</p><br>
+
+<p><strong>Recommended Diet Size:</strong>&nbsp;X-Large</p><br>
+
+<!--<p>To consume 400gm - 600gm of PetCubes per day.</p>-->
+    <!--</div>-->
+        </span>
+    	<div class="pts4">
+    <p class="title" style="font-family:Arial, Helvetica, sans-serif; color:#494847"> Dog </p>
+    
+    <div class="input" style="font-family:Arial, Helvetica, sans-serif; color:#494847"><span style="font-size:16px; line-height:30px;"><strong>Select breed</strong></span>
+    <?php $species_sql = "select species_id,species_name from species ORDER BY `species`.`species_name` ASC";
+		  $species_result = $mysqli->query($species_sql);
+	
+	?>
+    <select name="" onchange="shoe_detail(this.value)"  style="width:250px;color:#494847">
+    <?php while($row = $species_result->fetch_array()){?>
+    <option value="<?php echo  $row['species_id'];?>"> <?php echo $row['species_name'];?> </option>
+    <?php }?>
+    </select>
+    
+    <div style="margin-top:20px; font-size:14px">Can't find your pet's breed?<br />
+<a href="/contacts/">Contact us</a> to find out.</div>
+     </div>
+   <!-- <div class="input"><!--pet's weight-->   <!--<input type="text" name="weight" style="width:250px; "/> </div>-->
+    <!--  <div class="input"><!--pet's age-->   <!--<input type="text" name="weight"  style="width:250px;"/> </div>-->
+    
+    
+   		</div>		
+    
+   		 </div>
+    
+    </div>
+    <!----------------------------------------------------->
+    
+    
+    
+		</div><!-- #content -->
+	

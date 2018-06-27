@@ -1,0 +1,37 @@
+<?php
+/**
+ * Adepta Software Ltd
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ *
+ * @copyright   Copyright (c) 2012 Adepta Software Ltd. (http://adeptasoftware.co.uk)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php if($this->displayDeliveryDate()): ?>
+<li>
+    <label for="shipping-deliverydate"><?php echo $this->__('Desired Delivery Date') ?></label>
+    <div class="input-box">
+        <select id="shipping-deliverydate" name="delivery_date" title="<?php echo $this->__('Desired Delivery Date') ?>">
+        <?php
+            $dates = $this->getDeliveryDateArrayOptions();
+            foreach($dates as $date => $label):
+        ?>
+            <option value="<?php echo $date; ?>" <?php if($date == $this->getSelectedDeliveryDate()) echo ' selected="selected"';?>><?php echo $label; ?></option>
+        <?php
+            endforeach;
+        ?>
+        </select>
+    </div>
+</li>
+<?php else:?>
+<li>
+    <p><?php echo $this->__('Desired delivery dates are not available for this shipping method') ?></p>
+    <input type="hidden" name="delivery_date" value=""/>
+</li>
+<?php endif ?>

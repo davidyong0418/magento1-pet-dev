@@ -1,0 +1,54 @@
+<?php
+/**
+ * Adepta Software Ltd
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ *
+ * @copyright   Copyright (c) 2012 Adepta Software Ltd. (http://adeptasoftware.co.uk)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<ul id="delivery-dates" class="form-list">
+<?php echo $this->getChildHtml(); ?>
+</ul>
+<span id="delivery-dates-please-wait" class="a-left" style="display:none;">
+<img class="left" title="<?php echo $this->__('Fetching available delivery dates...')?>" alt="<?php echo $this->__('Fetching available delivery dates...')?>" src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif');?>">
+<?php echo $this->__('Fetching available delivery dates...')?>
+</span>
+<script type="text/javascript">
+//<![CDATA[
+var radioSelectorString = 'input[type="radio"][name="shipping_method"]';
+$$(radioSelectorString).each(function(el){
+    Event.observe(el, 'click', function(){
+        if (el.checked == true){
+            var shippingCode = el.getValue();
+ 
+            $$(radioSelectorString).each( function(el){ el.disable(); } );
+            $('delivery-dates').hide();
+            $('delivery-dates-please-wait').show();
+ 
+            new Ajax.Request('<?php echo $this->getPostUrl() ?>', {
+                method: 'post',
+                parameters: { 'shipping_code': shippingCode },
+                onSuccess: function(transport){ 
+                    var json = transport.responseText.evalJSON();
+                    Element.update('delivery-dates', json.dropdownhtml);
+                    $('delivery-dates-please-wait').hide();
+                    $('delivery-dates').show();
+                    $$(radioSelectorString).each( function(el){ el.enable(); } );
+                },
+                onFailure: function(){ 
+                    $('delivery-dates-please-wait').hide();
+                    $$(radioSelectorString).each( function(el){ el.enable(); } );
+                }
+            });
+        }
+    });
+});
+//]]>
+</script>

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Adepta Software Ltd
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ *
+ * @copyright   Copyright (c) 2012 Adepta Software Ltd. (http://adeptasoftware.co.uk)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+-->
+<layout version="0.1.0">
+    <adminhtml_sales_order_create_index>
+        <reference name="shipping_method">
+            <block type="adepta_deliverytime/adminhtml_createorder_deliverydate" template="adepta_deliverytime/create_order/delivery_date.phtml" name="create_delivery_date" />
+        </reference>
+    </adminhtml_sales_order_create_index>
+    <adminhtml_sales_order_create_load_block_data>
+        <reference name="shipping_method">
+            <block type="adepta_deliverytime/adminhtml_createorder_deliverydate" template="adepta_deliverytime/create_order/delivery_date.phtml" name="create_delivery_date" />
+        </reference>
+    </adminhtml_sales_order_create_load_block_data>
+    <adminhtml_sales_order_create_load_block_shipping_method>
+        <reference name="shipping_method">
+            <block type="adepta_deliverytime/adminhtml_createorder_deliverydate" template="adepta_deliverytime/create_order/delivery_date.phtml" name="create_delivery_date" />
+        </reference>
+    </adminhtml_sales_order_create_load_block_shipping_method>
+    <add_order_grid_column_handle>
+        <reference name="sales_order.grid">
+            <action method="addColumnAfter">
+                <columnId>desired_delivery_date</columnId>
+                <arguments module="Adepta_DeliveryTime" translate="header">
+                    <header>Delivery Date</header>
+                    <index>desired_delivery_date</index>
+                    <type>date</type>
+                    <gmtoffset>0</gmtoffset>
+                </arguments>
+                <after>shipping_name</after>
+            </action>
+        </reference>
+    </add_order_grid_column_handle>
+    <adminhtml_sales_order_grid>
+        <update handle="add_order_grid_column_handle" />
+    </adminhtml_sales_order_grid>
+    <adminhtml_sales_order_index>
+        <update handle="add_order_grid_column_handle" />
+    </adminhtml_sales_order_index>
+    <adminhtml_sales_order_view>
+        <reference name="order_tab_info">
+            <action method="setTemplate">
+                <template>adepta_deliverytime/view_order/tab_info.phtml</template>
+            </action>
+        </reference>
+    </adminhtml_sales_order_view>
+</layout>

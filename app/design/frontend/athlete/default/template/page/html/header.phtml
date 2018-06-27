@@ -1,0 +1,320 @@
+<?php
+
+/**
+
+ * Magento
+
+ *
+
+ * NOTICE OF LICENSE
+
+ *
+
+ * This source file is subject to the Academic Free License (AFL 3.0)
+
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+
+ * It is also available through the world-wide-web at this URL:
+
+ * http://opensource.org/licenses/afl-3.0.php
+
+ * If you did not receive a copy of the license and are unable to
+
+ * obtain it through the world-wide-web, please send an email
+
+ * to license@magentocommerce.com so we can send you a copy immediately.
+
+ *
+
+ * DISCLAIMER
+
+ *
+
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+
+ * versions in the future. If you wish to customize Magento for your
+
+ * needs please refer to http://www.magentocommerce.com for more information.
+
+ *
+
+ * @category    design
+
+ * @package     base_default
+
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+
+ */
+
+/**
+
+ * @var Mage_Page_Block_Html_Header $this
+
+ */
+
+ $athleteHelper = Mage::helper('athlete');
+
+$headerCss = 'header-container ' . $athleteHelper->getCfg('header/header_mobile');
+
+$menu_position = $athleteHelper->getCfg('header/menu');
+
+?>
+
+ <!DOCTYPE html>
+
+<html lang="en-US">
+
+<head>
+
+<meta charset="UTF-8"/>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pet Cubes | Just another WordPress site</title>
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+
+<link rel='stylesheet' id='contact-form-7-css'  href='<?php echo $this->getSkinUrl('css/contact.css') ?>' type='text/css' media='all' />
+
+<link rel='stylesheet' id='petcubes-style-css'  href='<?php echo $this->getSkinUrl('css/style.css') ?>' type='text/css' media='all' />
+
+<link rel='stylesheet' id='petcubes-default-css'  href='<?php echo $this->getSkinUrl('css/main.css') ?>' type='text/css' media='all' />
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"> 
+<script type='text/javascript' src='<?php echo $this->getSkinUrl('js/jquery-min.js') ?>'></script>
+
+
+
+
+<script type='text/javascript' src='http://petcubes.sg/skin/frontend/athlete/default/js/jquery.js'></script> 
+<script type="text/javascript" src="http://petcubes.sg/js/olegnax/jquery.jcarousel.min.js"></script>
+<script>var $j = jQuery.noConflict(true);</script>
+<script>
+$j('.block-login ul.slides').jcarousel({
+		scroll: 1,
+		initCallback: function(carousel){
+			$j('#forgot-password').click(function() {
+				carousel.next();
+				return false;
+			});
+			$j('#back-login').click(function() {
+				carousel.prev();
+				return false;
+			});
+			carousel.carouselID = '#' + $j(carousel.list).attr('id');
+			$j(carousel.carouselID).parent().jSwipe({
+				swipeLeft: function() { carousel.next(); },
+				swipeRight: function() { carousel.prev(); },
+				swipeMoving: function() {}
+			});
+		},
+		buttonNextHTML: null,
+		buttonPrevHTML: null
+	});
+</script>
+
+
+
+<script>
+jQuery(window).on("load", function() {
+	  var url = window.location;
+	
+    
+    jQuery('#nav  li a[href="'+url+'"]').addClass('active');
+ 
+
+});
+</script>
+
+<script>
+
+jQuery(document).ready(function () {
+			jQuery(".emailc").attr("disabled", "disabled"); 
+			jQuery(".telephonec").removeAttr("disabled"); 
+			jQuery(".telephonec").addClass("required-entry");
+    jQuery('#contact-mode-phone').click(function () {
+        if (jQuery(this).is(':checked')) {
+           jQuery(".emailc").attr("disabled", "disabled"); 
+		   jQuery(".emailc").val(""); 
+			jQuery(".telephonec").removeAttr("disabled");
+			jQuery(".telephonec").addClass("required-entry");
+			jQuery(".emailc").removeClass("required-entry");
+			
+        }
+    });
+
+    jQuery('#contact-mode-email').click(function () {
+        if (jQuery(this).is(':checked')) {
+            jQuery(".telephonec").attr("disabled", "disabled"); 
+			jQuery(".telephonec").val(""); 
+			jQuery(".emailc").removeAttr("disabled"); 
+			jQuery(".emailc").addClass("required-entry");
+			jQuery(".telephonec").removeClass("required-entry");
+        }
+    });
+});
+
+</script>
+
+
+<script>
+var clicks = 0;
+jQuery(document).ready(function () {
+	
+   jQuery('.accordion-toggle').click(function(){
+jQuery(this).removeClass("accordion-toggle").addClass("open").find(".glyphicon-plus").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+clicks++;
+
+})
+ });
+	
+
+	jQuery(document).on('click', '.open', function() {
+		if(clicks % 2 == 0){
+		
+jQuery(this).removeClass("open").addClass("accordion-toggle").find(".glyphicon-minus").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+		}
+});
+
+</script>
+
+
+
+
+
+</head>
+
+<body class="home page page-id-37 page-template page-template-templates-pages page-template-page-home page-template-templates-pagespage-home-php single-author wpb-js-composer js-comp-ver-4.11.2 vc_responsive" >
+
+<header>
+
+  <div class="header-wrapper clearfix">
+  <div class="menu-sec mobile" >  <?php  echo $this->getChildHtml('cart_top') ?>
+
+          <?php echo $this->getChildHtml('topLinks'); ?></div>
+
+    <nav class="navbar navbar-default">
+
+      <div class="container">
+
+        <div class="inside-container">
+
+          <div class="navbar-header">
+
+            <button aria-expanded="false" data-target="#petcubes-navbar-collapse" data-toggle="collapse" class="navbar-toggle collapsed" type="button"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+
+            <a href="<?php echo $this->getUrl(''); ?>" title="Pet Cubes" class="navbar-brand" rel="home"><img alt="Pet Cubes" src="<?php echo $this->getSkinUrl('images/header-logo.png') ?>"></a> </div>
+
+          <div id="petcubes-navbar-collapse" class="collapse navbar-collapse pull-left">
+
+        
+
+           <?php echo $this->getChildHtml('topMenu') ?>
+           <div class="menu-sec" >  <?php  echo $this->getChildHtml('cart_top') ?>
+
+          <?php echo $this->getChildHtml('topLinks'); ?></div>
+
+          </div>
+
+          
+
+       <!--   <div class="social_box pull-right">
+
+            	<ul>
+
+                	<li><a href="#"><img src="<?php echo $this->getSkinUrl('images/fb.jpg') ?>"/></a></li>
+
+                    <li><a href="#"><img src="<?php echo $this->getSkinUrl('images/youtube.jpg') ?>"/></a></li>
+
+                    <li><a href="#"><img src="<?php echo $this->getSkinUrl('images/skyp.jpg') ?>"/></a></li>
+
+                </ul>
+
+            </div>-->
+
+            <div class="clearfix"></div>
+
+        </div>
+
+      </div>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<?php
+if($this->getIsHomePage()) {
+?>
+<section id="header-hero-banner" class="clearfix margin-bottom-30">
+
+  <div class="header-hero-banner"><?php echo $this->getChildHtml('topContainer'); ?> <?php echo $this->getChildHtml('athlete_slideshow'); ?></div>
+
+</section>
+<?php } ?>
+
+
+<?php
+
+
+$routeName = Mage::app()->getRequest()->getRouteName();
+$identifier = Mage::getSingleton('cms/page')->getIdentifier();
+ 
+if($routeName == 'cms' && $identifier == 'contact-us') {
+   ?><div class="inner-banner"><img src="<?php echo $this->getSkinUrl('images/newcontact.jpg') ?>" alt="">
+   </div> <?php
+} 
+else if($routeName == 'cms' && $identifier == 'faq') { 
+?><div class="inner-banner"><img src="<?php echo $this->getSkinUrl('images/newfaq.jpg') ?>" alt=""></div> 
+
+<?php
+}
+else if($routeName == 'cms' && $identifier == 'about') { 
+?>
+<div class="inner-banner"><img src="<?php echo $this->getSkinUrl('images/newabout.jpg') ?>" alt=""></div>
+<?php
+}
+else if($routeName == 'cms' && $identifier == 'feeding') { 
+?><div class="inner-banner"><img src="<?php echo $this->getSkinUrl('images/newfeeding-guidelines.jpg') ?>" alt=""></div> <?php
+}
+else if($routeName == 'cms' && $identifier == 'reviews') { 
+?><div class="inner-banner"><img src="<?php echo $this->getSkinUrl('images/newreviews.jpg') ?>" alt=""></div> <?php
+}
+else if($this->getIsHomePage())
+{
+}
+
+
+ $currentUrl = $this->helper('core/url')->getCurrentUrl();
+ //Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).'storelocator/index/index'
+ ?>     
+
+ <?php if($currentUrl ===Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).'storelocator') { ?>
+ <div class-="inner-banner">
+  <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('store-locator-top-image')->toHtml();?> </div>
+ 
+ <?php } ?>
+ <?php if($currentUrl ===Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).'storelocator/index/index') { ?>
+ <div class-="inner-banner"><img src="<?php echo $this->getSkinUrl('images/newresellers.jpg') ?>" alt=""></div>
+ 
+ <?php } ?>
+  <?php if($currentUrl ===Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).'contacts') { ?>
+ <div class="inner-banner"><img src="<?php echo $this->getSkinUrl('images/newcontact.jpg') ?>" alt=""></div>
+ 
+ <?php } ?>
+   <?php if($currentUrl ===Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).'contacts/index/') { ?>
+ <div class="inner-banner"><img src="<?php echo $this->getSkinUrl('images/newcontact.jpg') ?>" alt=""></div>
+ 
+ <?php } ?>
+ <?php if($currentUrl ===Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).'news/category/review.html') { ?>
+ <div class="inner-banner"><img src="<?php echo $this->getSkinUrl('images/newreviews.jpg') ?>" alt=""></div>
+ 
+ <?php } ?>
+
+
+

@@ -1,0 +1,44 @@
+<?php $items = $this->getNewsItems() ?>
+<?php if (count($items)): ?>
+<div class="news-categories">
+    <div class="head block-title">
+        <strong><span>Recent Posts</span></strong>
+    </div>
+    <div class="block-content">
+        <div class="menu-categories">
+            <ul>
+                <?php
+				$latest=0;
+				 foreach ($items as $item): 
+              
+				if($this->getCategoryByNews($item->getID())->getData('title')=='review')
+{
+}
+else
+{
+				?>
+                    <li>
+                    <div class="recent_img">
+                    <?php
+                    $imageSize = $this->getFullImageSize($item); ?>
+                     <img src="<?php echo Mage::helper('clnews')->resizeImage(str_replace('clnews/', '', $item->getImageShortContent()), $imageSize['width'], $imageSize['height'], 'clnews'); ?>" />
+                    </div>
+                        <a href="<?php echo str_replace('clnews', $this->getAlias(), $item->getUrl()) ?>" ><?php echo $item->getTitle();?></a>
+                        
+                    </li>
+                    
+                    <?php $latest=$latest+1; ?>
+                    <?php
+					
+}
+
+				
+					 
+					  ?>
+                <?php endforeach; ?>
+                <!--<li><a href="<?php echo $this->getUrl(Mage::helper('clnews')->getRoute()) ?>">&gt;&gt;</a></li>-->
+            </ul>
+        </div>
+    </div>
+</div>
+<?php endif ?>
