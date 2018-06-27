@@ -4,10 +4,10 @@ Magento 1.8 Pet dev site
 ===============================
 Magento version 1.8
 
-|![1.png](screenshots/1.png)
+![1.png](screenshots/1.png)
 </br>
 </br>
-![2.png](screenshots/2.png)|
+![2.png](screenshots/2.png)
 </br>
 </br>
 -Product detail page
