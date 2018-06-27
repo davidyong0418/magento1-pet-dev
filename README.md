@@ -12,7 +12,7 @@ Magento version 1.8
 </br>
 -Product detail page
 </br>
-![3.png](screenshots/2.png)
+![3.png](screenshots/4.png)
 </br>
 </br>
 New to Magento? Need some help?
