@@ -6,8 +6,8 @@ Magento version 1.8
 
 |![1.png](screenshots/1.png)|![2.png](screenshots/2.png)|
 
----product detail page
-|![3.png](screenshots/2.png)|
+-Product detail page
+![3.png](screenshots/2.png)|
 New to Magento? Need some help?
 ------------------------------------
 * If you're not sure about the following, you probably need a little help before you start installing the Magento software:</br>
