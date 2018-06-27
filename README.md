@@ -4,10 +4,17 @@ Magento 1.8 Pet dev site
 ===============================
 Magento version 1.8
 
-|![1.png](screenshots/1.png)|![2.png](screenshots/2.png)|
-
+|![1.png](screenshots/1.png)
+</br>
+</br>
+![2.png](screenshots/2.png)|
+</br>
+</br>
 -Product detail page
-![3.png](screenshots/2.png)|
+</br>
+![3.png](screenshots/2.png)
+</br>
+</br>
 New to Magento? Need some help?
 ------------------------------------
 * If you're not sure about the following, you probably need a little help before you start installing the Magento software:</br>
